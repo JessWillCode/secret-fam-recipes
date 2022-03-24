@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-const initialUser = {
-    username: '',
-    password: ''
-}
-
-const CreateAccountForm = () => {
-    const [user, setUser] = useState(initialUser);
+const Login = () => {
+    const [state, setState] = useState({
+        username: '',
+        password: '',
+        error: ''
+    });
     const { push } = useHistory();
 
     const handleChange = (e) => {
-        setUser({
-            ...user,
+        setState({
+            ...state,
             [e.target.name]: e.target.value
-        })
+        });
     }
 
-    const handleSubmit = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        axios.post('https://back-end-recipe.herokuapp.com/api/auth/register', user)
+        axios.post(`https://back-end-recipe.herokuapp.com/api/auth/login`, state)
         .then(res => {
-            console.log(res);
-            setUser(res.config.data);
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('role', res.data.role);
+            localStorage.setItem('username', res.data.username);
             push('/recipes');
         })
         .catch(err => {
@@ -32,37 +32,40 @@ const CreateAccountForm = () => {
         })
     }
 
-    const handleLoginClick = (e) => {
+    const handleRegister = (e) => {
         e.preventDefault();
-        push('/login');
+        push('/register');
     }
-
-    return (
-    <div>
-        <h1>Secret Family Recipe Cookbook</h1>
-            <h2>Enter your Information below to Create your Account</h2>
+    
+    return(
+        <div>
+            <h1>Secret Family Recipe Cookbook</h1>
+            <h2>Login to see your recipes!</h2>
             <FormContainer>
-                 <label>Username:</label>
-                <input 
+                <Label>Username:</Label>
+                <Input
                 type='text'
                 name='username'
-                value={user.username}
+                id='username'
+                value={state.username}
                 onChange={handleChange}
                 />
-                 <label>Password:</label>
-                <input 
+                <Label>Password:</Label>
+                  <Input
                 type='password'
                 name='password'
-                value={user.password}
+                id='password'
+                value={state.password}
                 onChange={handleChange}
                 />
-                <Button onClick={handleSubmit}>Create Account</Button>
+                <LoginButton onClick={handleLogin}>Login</LoginButton>
+                <p id='error'>{state.error}</p>
             </FormContainer>
-            <LoginButton onClick={handleLoginClick}>Login</LoginButton>
-    </div>);
+            <Button onClick={handleRegister}>Register</Button>
+        </div>);
 }
 
-export default CreateAccountForm;
+export default Login;
 
 const FormContainer = styled.form`
     padding: 1em;

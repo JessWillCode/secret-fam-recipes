@@ -8,6 +8,7 @@ import RecipeList from '../src/components/RecipeList';
 import CreateAccountForm from '../src/components/CreateAccountForm';
 import Logout from './components/Logout';
 import Recipe from './components/Recipe';
+import Login from './components/Login';
 
 
 const App = () => {
@@ -26,7 +27,7 @@ const App = () => {
        
        <Route path='/register' component={CreateAccountForm} />
        
-       <Route path='/login' />
+       <Route path='/login' component={Login}/>
        
        <Route path='/' />
        <Redirect to='/login' />
