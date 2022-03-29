@@ -20,6 +20,7 @@ The little cards my grandma wrote the recipes on in her beautiful cursive are ge
 4. Ability to search for `recipes` by `title` or tagged `categories`.
 
 Deployed URL: [https://family-recipe-build.herokuapp.com/](https://family-recipe-build.herokuapp.com/)
+Wireframe URL: [Wireframe](https://www.canva.com/design/DAE2yZVUXug/ovZw4KjxKLPqboqaHuhGZQ/edit?utm_content=DAE2yZVUXug&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 # *Meet the Team*
 
